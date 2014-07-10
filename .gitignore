@@ -1,0 +1,4 @@
+dist/
+third_party/fswatch/
+third_party/google-test/
+.DS_Store
