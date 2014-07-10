@@ -1,3 +1,5 @@
+#include <gtest/gtest.h>
+
 //#include "../src/rtcpeerconnection.h"
 
 TEST(PeerConnection, shouldExist) {

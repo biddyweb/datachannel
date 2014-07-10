@@ -1,3 +1,0 @@
-﻿set path += third_party/libnice/agent/
-set path += third_party/google-test/include/
-set path += third_party/parson/

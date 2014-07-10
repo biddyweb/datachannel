@@ -1,0 +1,12 @@
+﻿" Add the following snippet to your .vimrc to autoload this project specific
+" configurations:
+"
+" if filereadable(glob('./.vim.local'))
+"   so ./.vim.local
+" endif
+
+set path+=third_party/libnice/agent/
+set path+=third_party/google-test/include/
+set path+=third_party/parson/
+
+let g:syntastic_cpp_include_dirs = [ 'third_party/libnice/agent/', 'third_party/google-test/include/', 'third_party/parson/' ]
