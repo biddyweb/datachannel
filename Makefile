@@ -24,7 +24,7 @@ parson:
 
 dist/%.o: src/%.cc
 	mkdir -p dist
-	g++ -c -o $@ $< $(JSON_H) $(LIBNICE_H) $(GLIB_H)
+	$(CXX) -c -o $@ $< $(JSON_H) $(LIBNICE_H) $(GLIB_H)
 
 libpeerconnection.a: $(OBJ_FILES)
 	ar rvs dist/$@ $^ $(LIBNICE_LIBS) $(JSON_LIB)
@@ -36,7 +36,7 @@ test_suite:
 	cd third_party/google-test/make/; make;
 
 test: libpeerconnection.a
-	g++ -std=c++11 -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
+	$(CXX) -std=c++11 -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
 	./dist/run_tests
 
 develop:
