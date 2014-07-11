@@ -1,2 +1,3 @@
 language: cpp
+install: apt-get install -y gtk-doc-tools
 script: make && make test
