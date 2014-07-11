@@ -3,7 +3,7 @@ script: make && make test
 before_install:
   - sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu/ trusty main universe"
   - sudo apt-get update -qq
-  - sudo apt-get install autoconf1.13 libglib2.0-dev
+  - sudo apt-get install automake autoconf autotools-dev
 compiler:
   - gcc
   - clang

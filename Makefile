@@ -20,7 +20,7 @@ libnice:
 
 parson:
 	mkdir -p dist/deps
-	gcc -c -o dist/deps/parson.o third_party/parson/parson.c
+	$(CC) -c -o dist/deps/parson.o third_party/parson/parson.c
 
 dist/%.o: src/%.cc
 	mkdir -p dist
