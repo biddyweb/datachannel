@@ -11,6 +11,14 @@ std::string RTCSessionDescription::getSdp() {
   return this->sdp;
 }
 
+void RTCSessionDescription::setType(std::string type) {
+  this->type = type;
+}
+
+void RTCSessionDescription::setSdp(std::string sdp) {
+  this->sdp = sdp;
+}
+
 RTCSessionDescription* RTCSessionDescription::parse(std::string descriptionAsString) {
   JSON_Value* root = json_parse_string(descriptionAsString.c_str());
   JsonValueScopeGuard guard(root);

@@ -1,8 +1,24 @@
+#include <gtest/gtest.h>
+
 #include "../src/rtcsessiondescription.h"
 
 TEST(SessionDescription, shouldExist) {
   RTCSessionDescription* sd = new RTCSessionDescription();
   ASSERT_TRUE(sd != NULL);
+  delete sd;
+}
+
+TEST(SessionDescription, shouldSetAndGetType) {
+  RTCSessionDescription* sd = new RTCSessionDescription();
+  sd->setType("testType");
+  ASSERT_TRUE(sd->getType() == "testType");
+  delete sd;
+}
+
+TEST(SessionDescription, shouldSetAndGetSdp) {
+  RTCSessionDescription* sd = new RTCSessionDescription();
+  sd->setSdp("testSDP");
+  ASSERT_TRUE(sd->getSdp() == "testSDP");
   delete sd;
 }
 

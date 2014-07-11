@@ -12,6 +12,8 @@ class RTCSessionDescription {
 
     std::string getType();
     std::string getSdp();
+    void setType(std::string type);
+    void setSdp(std::string sdp);
   private:
     std::string type;
     std::string sdp;
