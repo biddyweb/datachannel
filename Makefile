@@ -15,11 +15,7 @@ update:
 	git submodule update --init
 
 libnice:
-ifeq ($(CI), true)
-	cd third_party/libnice/; ./autogen.sh; make
-else
 	cd third_party/libnice/; ./configure; make
-endif
 	rm -rf dist/deps/libnice; mkdir -p dist/deps/libnice; cp third_party/libnice/agent/.libs/libagent.a dist/deps/libnice; cd dist/deps/libnice; ar x libagent.a
 
 parson:
