@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "../src/rtcpeerconnection.h"
+#include <mutex>
 
 RTCPeerConnection* pc;
 
