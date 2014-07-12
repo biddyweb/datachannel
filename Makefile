@@ -42,7 +42,7 @@ endif
 	cd third_party/google-test/make/; make;
 
 test: libpeerconnection.a
-	$(CXX) -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
+	$(CXX) -std=c++11 -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
 	./dist/run_tests
 
 develop:
