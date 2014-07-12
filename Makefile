@@ -34,13 +34,15 @@ libpeerconnection.a: $(OBJ_FILES)
 	ar rvs dist/$@ $^ $(LIBNICE_LIBS) $(JSON_LIB)
 
 test_suite:
+ifneq ($(CI), true)
 	git clone https://github.com/alandipert/fswatch.git third_party/fswatch
 	cd third_party/fswatch/; ./autogen.sh; ./configure; make
+endif
 	svn checkout http://googletest.googlecode.com/svn/trunk/ third_party/google-test; cd third_party/google-test; svn up -r690
 	cd third_party/google-test/make/; make;
 
 test: libpeerconnection.a
-	$(CXX) -std=c++11 -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
+	$(CXX) -o dist/run_tests test/main.cc dist/libpeerconnection.a $(GTEST_FLAGS) $(JSON_H) $(LIBNICE_H) $(GLIB_H) $(GLIB_LIBS)
 	./dist/run_tests
 
 develop:

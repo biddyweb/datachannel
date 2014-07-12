@@ -25,16 +25,31 @@ RTCPeerConnection::RTCPeerConnection() {
 }
 
 RTCPeerConnection::~RTCPeerConnection() {
-  g_main_loop_unref(this->gloop);
+  if(this->gloop)
+    g_main_loop_unref(this->gloop);
 }
 
-void RTCPeerConnection::createOffer(void (*onOfferReady)(RTCSessionDescription*)) {
+void RTCPeerConnection::createOffer(void onOfferReady(RTCSessionDescription*)) {
   this->onOfferReady = onOfferReady;
 
-  guint stream_id = nice_agent_add_stream(this->agent, 1);
-  nice_agent_set_stream_name(this->agent, stream_id, "datachannel");
+  this->streamId = nice_agent_add_stream(this->agent, 1);
+  nice_agent_set_stream_name(this->agent, this->streamId, "datachannel");
 
-  nice_agent_gather_candidates(this->agent, stream_id);
+  nice_agent_gather_candidates(this->agent, this->streamId);
+}
+
+void RTCPeerConnection::setRemoteDescription(RTCSessionDescription* description, void onRemoteDescriptionSetted()) {
+  std::string sdp = description->getSdp();
+
+  if(this->streamId == -1) {
+    this->streamId = nice_agent_add_stream(this->agent, 1);
+    nice_agent_set_stream_name(this->agent, this->streamId, "datachannel");
+  }
+
+  guint nc = nice_agent_parse_remote_sdp(this->agent, sdp.c_str());
+  g_print("decoded %d candidates!\n", nc);
+
+  onRemoteDescriptionSetted();
 }
 
 /** 
@@ -43,7 +58,7 @@ void RTCPeerConnection::createOffer(void (*onOfferReady)(RTCSessionDescription*)
  * This callback is fired when all the ice candidates are found.
  * Here the ice section of the sdp is generated and 
  **/
-void RTCPeerConnection::onCandidateGatheringDone(NiceAgent* agent, guint stream_id, gpointer data) {
+void RTCPeerConnection::onCandidateGatheringDone(NiceAgent* agent, guint streamId, gpointer data) {
   RTCPeerConnection* pc = (RTCPeerConnection*) data;
 
   gchar* sdp = nice_agent_generate_local_sdp(agent);
@@ -53,5 +68,5 @@ void RTCPeerConnection::onCandidateGatheringDone(NiceAgent* agent, guint stream_
   description->setSdp(sdp);
   pc->onOfferReady(description);
 
-  g_free(sdp);
+  //g_free(sdp);
 }

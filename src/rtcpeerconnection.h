@@ -10,7 +10,9 @@ class RTCPeerConnection {
     ~RTCPeerConnection();
     void createOffer(void onOfferReady(RTCSessionDescription*));
     void createAnswer(void onAnswerReady(RTCSessionDescription*));
+    void setRemoteDescription(RTCSessionDescription* description, void onRemoteDescriptionSetted());
   private:
+    int streamId = -1;
     /* Main Loop Stuff */
     static void* MainLoop(void* data);
     GThread* mainLoopThread;
@@ -23,6 +25,7 @@ class RTCPeerConnection {
     /* User callbacks section */
     void (*onOfferReady)(RTCSessionDescription*);
     void (*onAnswerReady)(RTCSessionDescription*);
+    void (*onRemoteDescriptionSetted)();
 };
 
 #endif
