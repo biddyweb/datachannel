@@ -12,7 +12,7 @@ class RTCPeerConnection {
     void createAnswer(void onAnswerReady(RTCSessionDescription*));
     void setRemoteDescription(RTCSessionDescription* description, void onRemoteDescriptionSetted());
   private:
-    int streamId = -1;
+    int streamId;
     /* Main Loop Stuff */
     static void* MainLoop(void* data);
     GThread* mainLoopThread;

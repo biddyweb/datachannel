@@ -6,4 +6,3 @@ install:
   - sudo apt-get install gtk-doc-tools libglib2.0-dev autoconf automake
 compiler:
   - gcc
-  - clang

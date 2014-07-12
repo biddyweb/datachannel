@@ -9,6 +9,8 @@ void* RTCPeerConnection::MainLoop(void* data) {
 }
 
 RTCPeerConnection::RTCPeerConnection() {
+  this->streamId = -1;
+
   this->gloop = g_main_loop_new(NULL, FALSE);
 
 #if !GLIB_CHECK_VERSION(2, 36, 0)
